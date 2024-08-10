@@ -1,25 +1,23 @@
-[project]
+[tool.poetry]
 name = "nonebot-plugin-bili-fav-watcher"
 version = "0.1.0"
 description = "A Bilibili user video favorites monitor"
+authors = ["SakanaVollerei <kawaiiorv@gmail.com>"]
 readme = "README.md"
-requires-python = ">=3.8, <4.0"
-authors = [
-    { name = "SakanaVollerei", email = "kawaiiorv@gmail.com" }
-]
-dependencies = [
-    "nonebot2>=2.2.0",
-    "bilibili-api-python>=16.2.0"
-]
-license = {text = "MIT"}
+homepage = "https://github.com/kawaiior/nonebot-plugin-bili-fav-watcher"
 
-keywords = ["nonebot2", "bilibili"]
+[tool.poetry.dependencies]
+python = ">=3.8,<4.0"
+nonebot2 = ">=2.2.0"
+bilibili-api-python = ">=16.2.0"
 
-[project.urls]
-Homepage = "https://github.com/kawaiior/nonebot-plugin-bili-fav-watcher"
+[tool.poetry.extras]
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.nonebot]
-plugins = ["nonebot_plugin_bili_fav_watcher"]
-adapters = [
-    "nonebot.adapters.onebot.v11"
-]
+adapters = ["nonebot.adapters.onebot.v11"]

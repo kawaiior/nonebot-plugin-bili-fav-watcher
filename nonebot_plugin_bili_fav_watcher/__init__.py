@@ -18,7 +18,7 @@ __plugin_meta__ = PluginMetadata(
     extra={
         'author': '鱼酱',
         'license': 'MIT',
-        'version': '0.1.1'
+        'version': '0.1.2'
     }
 )
 

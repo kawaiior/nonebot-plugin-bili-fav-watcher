@@ -22,6 +22,10 @@ async def _add_uid_watch(bot: Bot, event: GroupMessageEvent, uid: str):
         pass
     # 添加uid到监控列表
     if uid in WATCH_USER_DATA.keys():
+        # 判断group_id是否已经存在
+        if event.group_id in WATCH_USER_DATA[uid]:
+            await bot.send(event=event, message=f"B站用户 `{user_name}` 已在监听列表中", reply_message=True)
+            return
         WATCH_USER_DATA[uid].append(event.group_id)
     else:
         WATCH_USER_DATA[uid] = [event.group_id]

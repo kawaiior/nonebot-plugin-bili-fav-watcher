@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-bili-fav-watcher"
-version = "0.1.1"
+version = "0.1.2"
 description = "A Bilibili user video favorites monitor"
 authors = ["SakanaVollerei <kawaiiorv@gmail.com>"]
 readme = "README.md"
@@ -19,6 +19,3 @@ nonebot-adapter-onebot = { version = "^2.0.0-beta.1", optional = true }
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.nonebot]
-adapters = ["nonebot.adapters.onebot.v11"]

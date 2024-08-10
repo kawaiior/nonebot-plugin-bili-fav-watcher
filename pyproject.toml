@@ -5,6 +5,7 @@ description = "A Bilibili user video favorites monitor"
 authors = ["SakanaVollerei <kawaiiorv@gmail.com>"]
 readme = "README.md"
 homepage = "https://github.com/kawaiior/nonebot-plugin-bili-fav-watcher"
+repository = "https://github.com/kawaiior/nonebot-plugin-bili-fav-watcher"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4.0"

@@ -1,4 +1,5 @@
 from nonebot.plugin import PluginMetadata
+from .config import Config
 
 usage = """使用方式:
 <favw> [uid]: 添加B站用户。
@@ -23,9 +24,10 @@ __plugin_meta__ = PluginMetadata(
     extra={
         'author': '鱼酱',
         'license': 'MIT',
-        'version': '0.1.5'
+        'version': '0.1.7'
     },
-    homepage="https://github.com/kawaiior/nonebot-plugin-bili-fav-watcher"
+    homepage="https://github.com/kawaiior/nonebot-plugin-bili-fav-watcher",
+    config=Config
 )
 
 from .core import *

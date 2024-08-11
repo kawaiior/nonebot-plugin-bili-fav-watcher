@@ -5,8 +5,9 @@ from nonebot import require, get_bots, logger, on_command
 from bilibili_api.favorite_list import get_video_favorite_list, get_video_favorite_list_content
 from nonebot.adapters.onebot.v11 import MessageSegment, MessageEvent, Bot
 
-from .config import WATCH_USER_DATA, USER_FAV_MEDIA_CACHE, SLEEP_INTERVAL, CACHE_CLEANUP_THRESHOLD, \
-    INTERVAL_BETWEEN_RUNS, NEW_VIDEO_THRESHOLD, is_admin, BILI_FAV_WATCHER_PRIORITY
+from .local import WATCH_USER_DATA, USER_FAV_MEDIA_CACHE, is_admin
+from .config import SLEEP_INTERVAL, CACHE_CLEANUP_THRESHOLD, INTERVAL_BETWEEN_RUNS, NEW_VIDEO_THRESHOLD, \
+    BILI_FAV_WATCHER_PRIORITY
 from .util import get_bili_user_name
 
 

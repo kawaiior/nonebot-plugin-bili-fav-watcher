@@ -5,8 +5,8 @@ from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, Message
 from nonebot.internal.params import ArgStr
 from nonebot.params import CommandArg
 
-from .config import is_admin, WATCH_USER_DATA, save_plugin_data, is_superuser, ADMIN_USERS, ADMIN_ONLY, set_admin_only, \
-    BILI_FAV_WATCHER_PRIORITY
+from .config import BILI_FAV_WATCHER_PRIORITY
+from .local import is_admin, WATCH_USER_DATA, save_plugin_data, is_superuser, ADMIN_USERS, ADMIN_ONLY, set_admin_only
 from .util import get_bili_user_name, get_group_message_first_at
 
 
@@ -36,6 +36,7 @@ async def _add_uid_watch(bot: Bot, event: GroupMessageEvent, uid: str):
     save_plugin_data()
     await bot.send(event=event, message=f"B站用户 `{user_name}` 已添加至监听列表", reply_message=True)
 
+
 add_watch = on_command("favw", aliases={"视奸"}, priority=BILI_FAV_WATCHER_PRIORITY)
 @add_watch.handle()
 async def _(bot: Bot, event: GroupMessageEvent, arg: Message = CommandArg()):
@@ -50,6 +51,7 @@ async def _(bot: Bot, event: GroupMessageEvent, arg: Message = CommandArg()):
         # 处理
         await _add_uid_watch(bot, event, uid)
         await add_watch.finish()
+
 
 @add_watch.got("uid")
 async def _(bot: Bot, event: GroupMessageEvent, uid: str = ArgStr("uid")):
@@ -89,6 +91,7 @@ async def _(bot: Bot, event: GroupMessageEvent, arg: Message = CommandArg()):
         # 处理
         await _remove_uid_watch(bot, event, uid)
         await del_watch.finish()
+
 
 @del_watch.got("uid")
 async def _(bot: Bot, event: GroupMessageEvent, uid: str = ArgStr("uid")):

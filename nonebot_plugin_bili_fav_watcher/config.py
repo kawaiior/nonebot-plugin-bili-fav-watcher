@@ -1,7 +1,6 @@
 from nonebot import get_driver, get_plugin_config
 
-from pydantic import BaseModel
-
+from pydantic import BaseModel, Field
 
 driver = get_driver()
 
@@ -24,7 +23,7 @@ class ScopedConfig(BaseModel):
 
 
 class Config(BaseModel):
-    bili_fav_watcher: ScopedConfig
+    bili_fav_watcher: ScopedConfig = Field(default_factory=ScopedConfig)
 
 
 plugin_config = get_plugin_config(Config)

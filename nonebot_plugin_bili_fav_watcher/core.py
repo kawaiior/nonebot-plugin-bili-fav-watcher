@@ -6,7 +6,7 @@ from bilibili_api.favorite_list import get_video_favorite_list, get_video_favori
 from nonebot.adapters.onebot.v11 import MessageSegment, MessageEvent, Bot
 
 from .config import WATCH_USER_DATA, USER_FAV_MEDIA_CACHE, SLEEP_INTERVAL, CACHE_CLEANUP_THRESHOLD, \
-    INTERVAL_BETWEEN_RUNS, NEW_VIDEO_THRESHOLD, is_admin
+    INTERVAL_BETWEEN_RUNS, NEW_VIDEO_THRESHOLD, is_admin, BILI_FAV_WATCHER_PRIORITY
 from .util import get_bili_user_name
 
 
@@ -112,7 +112,7 @@ async def _watch_users(bot: Bot):
     return count
 
 
-watch_now = on_command("favw_now", aliases={"开始视奸"})
+watch_now = on_command("favw_now", aliases={"开始视奸"}, priority=BILI_FAV_WATCHER_PRIORITY)
 @watch_now.handle()
 async def _(bot: Bot, event: MessageEvent):
     if not is_admin(event.user_id):

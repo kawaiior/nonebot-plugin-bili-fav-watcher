@@ -1,35 +1,59 @@
+from nonebot import logger, get_driver, require, get_plugin_config
 import json
-from pathlib import Path
 from typing import Dict, List
 
-from nonebot import logger, get_driver
+from pydantic import BaseModel
 
-CONFIG_PATH = Path("data/fav_watcher")
-CONFIG_FILE_PATH = CONFIG_PATH / "config.json"
+require("nonebot_plugin_localstore")
 
-INTERVAL_BETWEEN_RUNS = 60 * 1  # 遍历间隔
-NEW_VIDEO_THRESHOLD = 60 * 2  # 判定阈值
-CACHE_CLEANUP_THRESHOLD = 60 * 3  # 清理阈值
-SLEEP_INTERVAL = 5  # 等待时间
+import nonebot_plugin_localstore as store
+
+driver = get_driver()
+
+config = driver.config
+
+class ScopedConfig(BaseModel):
+    command_priority: int = 50
+    interval_between_runs: int = 60
+    new_video_threshold: int = 120
+    cache_cleanup_threshold: int = 180
+    sleep_interval: int = 5
 
 
-USER_FAV_MEDIA_CACHE: Dict[str, Dict[str, int]] = {
+class Config(BaseModel):
+    bili_fav_watcher: ScopedConfig
 
-}
 
-WATCH_USER_DATA: Dict[str, List] = {
+plugin_config = get_plugin_config(ScopedConfig)
 
-}
 
+BILI_FAV_WATCHER_PRIORITY: int = plugin_config.command_priority
+INTERVAL_BETWEEN_RUNS: int = plugin_config.interval_between_runs  # 遍历间隔
+NEW_VIDEO_THRESHOLD: int = plugin_config.new_video_threshold  # 判定阈值
+CACHE_CLEANUP_THRESHOLD: int = plugin_config.cache_cleanup_threshold  # 清理阈值
+SLEEP_INTERVAL: int = plugin_config.sleep_interval  # 等待时间
+
+"""
+以下为数据存储
+"""
+
+DATA_PATH = store.get_data_dir("fav_watcher")
+DATA_FILE_PATH = store.get_data_file("fav_watcher", "data.json")
+
+
+USER_FAV_MEDIA_CACHE: Dict[str, Dict[str, int]] = {}
+WATCH_USER_DATA: Dict[str, List] = {}
 ADMIN_USERS: List[int] = []
+ADMIN_ONLY: bool = False
 
-ADMIN_ONLY = False
+SUPERUSERS: set[str] = config.superusers
 
-if not CONFIG_PATH.exists():
-    CONFIG_PATH.mkdir(parents=True, exist_ok=True)
+if not DATA_PATH.exists():
+    DATA_PATH.mkdir(parents=True, exist_ok=True)
 
-if CONFIG_FILE_PATH.exists():
-    with open(CONFIG_FILE_PATH, "r") as f:
+# 加载
+if DATA_FILE_PATH.exists():
+    with open(DATA_FILE_PATH, "r") as f:
         data = f.read()
         if data:
             data = json.loads(data)
@@ -38,30 +62,42 @@ if CONFIG_FILE_PATH.exists():
             ADMIN_USERS = data.get("admin", [])
             ADMIN_ONLY = data.get("admin_only", False)
 
-            logger.success(f"加载了 {len(ADMIN_USERS)} 个管理员；{str(ADMIN_USERS)}")
+            logger.success(f"加载了 {len(ADMIN_USERS)} 个管理员 {str(ADMIN_USERS)}")
 else:
-    with open(CONFIG_FILE_PATH, "w") as f:
-        f.write('{"cache": {}, "data": {}, "admin": [], "admin_only": false}')
+    with open(DATA_FILE_PATH, "w") as f:
+        f.write(json.dumps({
+            "cache": {},
+            "data": {},
+            "admin": [],
+            "admin_only": False
+        }))
 
 
-def save_config():
-    with open(CONFIG_FILE_PATH, "w") as _f:
+def save_plugin_data():
+    with open(DATA_FILE_PATH, "w") as _f:
         _f.write(json.dumps({
             "cache": USER_FAV_MEDIA_CACHE,
             "data": WATCH_USER_DATA,
-            "admin": ADMIN_USERS
+            "admin": ADMIN_USERS,
+            "admin_only": ADMIN_ONLY
         }))
+
+
+def is_superuser(user_id: int) -> bool:
+    return str(user_id) in SUPERUSERS
 
 
 def is_admin(user_id: int) -> bool:
     if ADMIN_ONLY:
-        return user_id in ADMIN_USERS
+        return is_superuser(user_id) or user_id in ADMIN_USERS
     return True
 
 
-driver = get_driver()
+def set_admin_only(admin_only: bool):
+    global ADMIN_ONLY
+    ADMIN_ONLY = admin_only
 
 
 @driver.on_shutdown
 async def _():
-    save_config()
+    save_plugin_data()

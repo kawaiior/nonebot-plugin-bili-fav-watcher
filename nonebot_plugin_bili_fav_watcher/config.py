@@ -35,10 +35,3 @@ INTERVAL_BETWEEN_RUNS: int = plugin_config.bili_fav_watcher.interval_between_run
 NEW_VIDEO_THRESHOLD: int = plugin_config.bili_fav_watcher.new_video_threshold  # 判定阈值
 CACHE_CLEANUP_THRESHOLD: int = plugin_config.bili_fav_watcher.cache_cleanup_threshold  # 清理阈值
 SLEEP_INTERVAL: int = plugin_config.bili_fav_watcher.sleep_interval  # 等待时间
-
-logger.info(f"配置信息: "
-            f"BILI_FAV_WATCHER_PRIORITY: {plugin_config.bili_fav_watcher.command_priority}"
-            f"INTERVAL_BETWEEN_RUNS: {plugin_config.bili_fav_watcher.interval_between_runs}"
-            f"NEW_VIDEO_THRESHOLD: {plugin_config.bili_fav_watcher.new_video_threshold}"
-            f"CACHE_CLEANUP_THRESHOLD: {plugin_config.bili_fav_watcher.cache_cleanup_threshold}"
-            f"SLEEP_INTERVAL: {plugin_config.bili_fav_watcher.sleep_interval}")

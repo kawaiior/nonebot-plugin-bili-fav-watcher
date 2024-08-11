@@ -46,7 +46,7 @@ ps: 使用时请在命令前添加命令判定符，一般为`/`或`#`
 
 ## 配置
 
-`BILI_FAV_WATCHER__COMMAND_PRIORITY` 插件命令权重
+`BILI_FAV_WATCHER__COMMAND_PRIORITY` 插件命令权重（默认值：50）
 
 `BILI_FAV_WATCHER__INTERVAL_BETWEEN_RUNS` 收藏夹遍历间隔（单位：秒，默认值：60）
 

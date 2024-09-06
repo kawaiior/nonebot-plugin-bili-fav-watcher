@@ -2,8 +2,10 @@ from bilibili_api import Credential
 from bilibili_api.user import User
 from nonebot.adapters.onebot.v11 import GroupMessageEvent
 
+from nonebot_plugin_bili_fav_watcher.config import SESSDATA
+
 CREDENTIAL = Credential(
-    sessdata=""
+    sessdata=SESSDATA
 )
 
 async def get_bili_user_name(uid: int) -> str:

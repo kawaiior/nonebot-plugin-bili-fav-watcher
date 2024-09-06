@@ -55,3 +55,6 @@ ps: 使用时请在命令前添加命令判定符，一般为`/`或`#`
 `BILI_FAV_WATCHER__CACHE_CLEANUP_THRESHOLD` 缓存清理阈值（单位：秒，默认值：180）
 
 `BILI_FAV_WATCHER__SLEEP_INTERVAL` 遍历过程中休眠间隔（单位：秒，默认值：5）
+
+`BILI_FAV_WATCHER__SESSDATA` B站登录凭证（默认值为空字符串）
+

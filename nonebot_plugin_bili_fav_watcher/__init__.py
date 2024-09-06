@@ -24,7 +24,7 @@ __plugin_meta__ = PluginMetadata(
     extra={
         'author': '鱼酱',
         'license': 'MIT',
-        'version': '0.1.10'
+        'version': '0.1.11'
     },
     homepage="https://github.com/kawaiior/nonebot-plugin-bili-fav-watcher",
     config=Config

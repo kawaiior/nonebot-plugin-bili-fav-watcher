@@ -69,6 +69,11 @@ async def _remove_uid_watch(bot: Bot, event: GroupMessageEvent, uid: str):
     if uid in WATCH_USER_DATA.keys():
         if event.group_id in WATCH_USER_DATA[uid]:
             WATCH_USER_DATA[uid].remove(event.group_id)
+
+            # 如果uid的监听群组为空，则删除uid
+            if len(WATCH_USER_DATA[uid]) == 0:
+                del WATCH_USER_DATA[uid]
+
             save_plugin_data()
             await bot.send(event=event, message="uid删除成功", reply_message=True)
         else:

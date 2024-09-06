@@ -20,6 +20,7 @@ class ScopedConfig(BaseModel):
     new_video_threshold: int = 120
     cache_cleanup_threshold: int = 180
     sleep_interval: int = 5
+    sessdata: str = ""
 
 
 class Config(BaseModel):
@@ -34,3 +35,4 @@ INTERVAL_BETWEEN_RUNS: int = plugin_config.bili_fav_watcher.interval_between_run
 NEW_VIDEO_THRESHOLD: int = plugin_config.bili_fav_watcher.new_video_threshold  # 判定阈值
 CACHE_CLEANUP_THRESHOLD: int = plugin_config.bili_fav_watcher.cache_cleanup_threshold  # 清理阈值
 SLEEP_INTERVAL: int = plugin_config.bili_fav_watcher.sleep_interval  # 等待时间
+SESSDATA: str = plugin_config.bili_fav_watcher.sessdata  # B站SESSDATA

@@ -56,5 +56,12 @@ ps: 使用时请在命令前添加命令判定符，一般为`/`或`#`
 
 `BILI_FAV_WATCHER__SLEEP_INTERVAL` 遍历过程中休眠间隔（单位：秒，默认值：5）
 
-`BILI_FAV_WATCHER__SESSDATA` B站登录凭证（默认值为空字符串）
+`BILI_FAV_WATCHER__SESSDATA` B站登录凭证的核心字段（默认值为空字符串）
 
+`BILI_FAV_WATCHER__BILI_JCT` B站登录凭证的字段之一（默认值为空字符串）
+
+`BUVID3` B站登录凭证的字段之一（默认值为空字符串）
+
+`DEDEUSERID` B站登录凭证的字段之一（默认值为空字符串）
+
+`AC_TIME_VALUE` B站登录凭证的有效期（默认值为空字符串，该字段存储在localStorage中而非cookie）

@@ -28,7 +28,7 @@ async def _watch_users(bot: Bot):
 
             fav_cache = USER_FAV_MEDIA_CACHE.get(str(user_id), {})
 
-            user_name = "获取用户名失败"
+            user_name = f"UID: {user_id}"
             try:
                 # 拿到用户个人信息
                 user_name = await get_bili_user_name(int_user_id)
